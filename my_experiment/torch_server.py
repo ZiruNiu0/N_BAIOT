@@ -1,3 +1,4 @@
+import logging
 import torch
 from torch.utils.data import Dataset, DataLoader, random_split
 from os import path
@@ -40,7 +41,7 @@ def load_data(args):
         data_path = args.test_data_url
         dataset = MyDataset(data_path)
         train_data_global = None
-        test_data_global = [DataLoader(dataset, args.batch_size, shuffle=False)]
+        test_data_global = DataLoader(dataset, args.batch_size, shuffle=False)
         test_data_num = len(test_data_global)
     else:
         #client data
@@ -70,7 +71,6 @@ class LogisticRegression(torch.nn.Module):
         self.linear = torch.nn.Linear(input_dim, output_dim)
 
     def forward(self, x):
-        import torch
         outputs = torch.sigmoid(self.linear(x))
         return outputs
 
@@ -118,6 +118,7 @@ if __name__ == "__main__":
 
     # load model (the size of MNIST image is 28 x 28)
     model = NeuralNetwork(115)
+    # server_aggregator = MyServerAggregator()
 
     # start training
     fedml_runner = FedMLRunner(args, device, dataset, model)
