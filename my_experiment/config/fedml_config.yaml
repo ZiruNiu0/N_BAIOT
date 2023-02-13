@@ -9,7 +9,7 @@ environment_args:
 
 data_args:
   dataset: "n_baiot"
-  data_cache_dir: ~/fedml_data/data.csv
+  data_cache_dir: "data.csv"
   partition_method: "hetero"
   partition_alpha: 0.7
   test_data_url: "https://fedml.s3.us-west-1.amazonaws.com/1676300147201N_BAIOT_10clients.csv"
